@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ARVO — courses et devises</title>
+<meta name="description" content="ARVO : préparez vos courses et convertissez vos devises en un instant.">
+<meta name="theme-color" content="#bcbdc0">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ARVO">
+<meta name="format-detection" content="telephone=no">
+<script src="theme-init.js"></script>
+<style>
+/* Écran de lancement : styles en ligne pour apparaître avant le chargement du reste. */
+#splash{--s-bg:#bcbdc0;position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--s-bg);opacity:1;transition:opacity .55s cubic-bezier(.4,0,.2,1),visibility 0s .55s}
+#splash::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.2),transparent 45%,rgba(255,255,255,.08)),linear-gradient(90deg,#c9c9ca 0%,#b9bbbe 9%,#aeb0b5 17%,#bcbdc0 26%,#c8c8ca 34%,#adaeb2 44%,#bcbdc0 52%,#a6a8ae 62%,#bfc0c2 71%,#aaacb1 80%,#bcbdbf 90%,#c6c6c8 100%)}
+#splash::after{content:"";position:absolute;inset:0;background:radial-gradient(46% 34% at 50% 46%,rgba(255,255,255,.34),transparent 72%)}
+#splash img{position:relative;z-index:1;display:block;width:112px;height:112px;border-radius:25px;box-shadow:0 0 0 1px rgba(255,255,255,.4),0 26px 56px -20px rgba(20,22,30,.6);animation:splash-logo .95s cubic-bezier(.2,.8,.2,1) .12s both;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+#splash.is-leaving{opacity:0;visibility:hidden}
+#splash.is-leaving img{transform:scale(1.05)}
+:root[data-theme="dark"] #splash{--s-bg:#030406}
+:root[data-theme="dark"] #splash::before{background:linear-gradient(90deg,#030406 0%,#07080c 9%,#0c0d12 17%,#040508 26%,#101116 34%,#05060a 44%,#0a0b10 52%,#151720 62%,#05060a 71%,#101319 80%,#05060a 90%,#08090d 100%)}
+:root[data-theme="dark"] #splash::after{background:radial-gradient(60% 46% at 50% 0%,rgba(150,160,185,.18),transparent 72%),radial-gradient(34% 26% at 50% 46%,rgba(130,145,180,.12),transparent 72%)}
+:root[data-theme="dark"] #splash img{box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 90px -10px rgba(120,135,175,.28),0 26px 60px -20px #000}
+@keyframes splash-logo{from{opacity:0;transform:scale(.94);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+@media (prefers-reduced-motion:reduce){#splash img{animation:none}#splash,#splash img{transition-duration:.01ms}}
+</style>
+<noscript><style>#splash{display:none}</style></noscript>
+</head>
+<body>
+<div id="splash" aria-hidden="true"><img src="icons/icon.svg" width="112" height="112" alt=""></div>
+<div id="root"></div>
+<noscript><p style="padding:24px;font-family:sans-serif">ARVO a besoin de JavaScript pour fonctionner.</p></noscript>
+<script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

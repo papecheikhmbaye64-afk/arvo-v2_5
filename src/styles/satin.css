@@ -1,0 +1,134 @@
+/* ARVO — identité « satin ».
+   Chargée en dernier : elle ne change que les couleurs, les surfaces et le bouton Scanner.
+   Palette mesurée sur les deux images de référence :
+   clair  = argent satiné (#a0a1a9 → #d0d1d1), légère dominante froide, bandes verticales douces ;
+   sombre = noir bleuté (#030406 → #171820), voile de lumière en haut au centre. */
+
+/* ——— Jetons : clair ——— */
+:root, .app {
+  --bg: #bcbdc0;
+  --ink: #121316;
+  --ink-2: #3b3e45;
+  --ink-3: #4c4f57;
+  --on-ink: #f4f4f5;
+  --accent: #34373d;
+  --accent-soft: rgba(30, 32, 40, .1);
+  --danger: #b3202f;
+  --ok: #136a41;
+
+  --glass: rgba(243, 243, 245, .68);
+  --glass-2: rgba(246, 246, 248, .84);
+  --glass-edge: rgba(255, 255, 255, .72);
+  --sheet: rgba(236, 236, 239, .985);
+  --item: rgba(241, 241, 243, .84);
+  --field: rgba(255, 255, 255, .62);
+  --hairline: rgba(22, 24, 32, .14);
+  --shadow: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 18px 40px -26px rgba(26, 28, 38, .5);
+  --shadow-up: 0 20px 48px -20px rgba(26, 28, 38, .5);
+
+  --soft: rgba(22, 24, 32, .08);
+  --bar: rgba(22, 24, 32, .16);
+  --link: #25272c;
+  --toast-bg: #1c1d20; --toast-fg: #f4f4f5; --toast-edge: rgba(255, 255, 255, .1); --toast-link: #d6d9e0;
+
+  /* Boutons pleins : le gris sombre des boutons de la référence claire. */
+  --solid: #1c1d20;
+  --on-solid: #f4f4f5;
+}
+
+/* ——— Jetons : sombre ——— */
+:root[data-theme="dark"], :root[data-theme="dark"] .app {
+  --bg: #030406;
+  --ink: #f2f3f5;
+  --ink-2: #c4c7ce;
+  --ink-3: #9a9fa9;
+  --on-ink: #0c0d10;
+  --accent: #c9ccd4;
+  --accent-soft: rgba(255, 255, 255, .08);
+  --danger: #ff7b86;
+  --ok: #62d9a0;
+
+  --glass: rgba(20, 21, 26, .72);
+  --glass-2: rgba(26, 27, 32, .88);
+  --glass-edge: rgba(255, 255, 255, .09);
+  --sheet: rgba(18, 19, 23, .985);
+  --item: rgba(24, 25, 30, .9);
+  --field: rgba(255, 255, 255, .06);
+  --hairline: rgba(255, 255, 255, .12);
+  --shadow: 0 1px 0 rgba(255, 255, 255, .06) inset, 0 18px 40px -22px rgba(0, 0, 0, .85);
+  --shadow-up: 0 20px 48px -14px rgba(0, 0, 0, .9);
+
+  --soft: rgba(255, 255, 255, .08);
+  --bar: rgba(255, 255, 255, .16);
+  --link: #d4d7de;
+  --toast-bg: #e3e4e7; --toast-fg: #0d0e10; --toast-edge: rgba(0, 0, 0, .1); --toast-link: #2b3140;
+
+  /* Boutons pleins : le gris clair des boutons de la référence sombre. */
+  --solid: #dfe0e3;
+  --on-solid: #0c0d10;
+}
+
+/* ——— Fond ——— */
+.backdrop, :root[data-theme="dark"] .backdrop { background: var(--bg); }
+.backdrop::before {
+  inset: -4% -8%;
+  background: linear-gradient(90deg, #cbcbcb 0%, #bebfc2 7%, #b4b4b8 14%, #aeb0b4 20%, #c5c5c6 28%, #aaabaf 36%, #bababe 43%, #a9adaf 50%, #bdbec0 57%, #a0a1a9 65%, #bfc0c1 72%, #a3a6ac 80%, #b6b7b9 88%, #c8c8ca 100%);
+  filter: blur(30px);
+  opacity: .95;
+  -webkit-mask-image: none; mask-image: none;
+}
+.backdrop::after {
+  background:
+    radial-gradient(70% 40% at 50% 0%, rgba(255, 255, 255, .32), transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, .16) 0%, transparent 40%, rgba(255, 255, 255, .1) 100%);
+  opacity: 1;
+}
+:root[data-theme="dark"] .backdrop::before {
+  background: linear-gradient(90deg, #030406 0%, #07080c 7%, #0c0d12 14%, #040508 21%, #101116 29%, #05060a 36%, #0a0b10 43%, #151720 51%, #05060a 58%, #101319 66%, #0b0d14 74%, #05060a 82%, #0d0e12 90%, #07080b 100%);
+  opacity: .9;
+}
+:root[data-theme="dark"] .backdrop::after {
+  background:
+    radial-gradient(60% 38% at 50% 0%, rgba(150, 160, 185, .16), transparent 72%),
+    linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .6) 100%);
+}
+
+/* ——— Surfaces ——— */
+.card, .swipe-fg, .btn-glass, .tabbar, .undo-box, .notice {
+  background: var(--glass);
+  border-color: var(--glass-edge);
+  box-shadow: var(--shadow);
+}
+.tabbar { background: var(--glass-2); }
+.swipe-fg, .undo-box { background: var(--item); }
+:root[data-theme="dark"] :is(.card, .swipe-fg, .btn-glass, .tabbar, .undo-box, .notice) { background: var(--glass); border-color: var(--glass-edge); box-shadow: var(--shadow); }
+:root[data-theme="dark"] .tabbar { background: var(--glass-2); }
+:root[data-theme="dark"] :is(.swipe-fg, .undo-box) { background: var(--item); }
+
+.composer input, .field input, .search input, .pill { background: var(--field); }
+:root[data-theme="dark"] :is(.composer input, .field input, .search input, .pill) { background: var(--field); }
+.icon-btn { background: var(--glass-2); border: 1px solid var(--glass-edge); box-shadow: var(--shadow); }
+:root[data-theme="dark"] .icon-btn { background: var(--glass-2); border-color: var(--glass-edge); box-shadow: none; }
+.icon-btn.sm, :root[data-theme="dark"] .icon-btn.sm { background: transparent; border-color: transparent; box-shadow: none; }
+.eyebrow, :root[data-theme="dark"] .eyebrow { color: var(--ink-3); }
+
+/* Boutons pleins et états « actifs » : un seul gris, repris des boutons des références. */
+.add-btn, .btn-primary, .swap-btn, .tabbar a.is-active, .chip.is-on, .code-badge,
+:root[data-theme="dark"] :is(.add-btn, .btn-primary, .swap-btn, .tabbar a.is-active, .chip.is-on) { background: var(--solid); color: var(--on-solid); }
+.chip.is-on { border-color: var(--solid); }
+.is-done .check, :root[data-theme="dark"] .is-done .check { background: var(--solid); border-color: var(--solid); color: var(--on-solid); }
+.code-badge { color: var(--on-solid); }
+
+/* Voile derrière les feuilles : neutre, sans teinte. */
+.scrim { background: rgba(8, 9, 13, .5); }
+
+/* ——— Bouton Scanner : icône seule ——— */
+.scan-btn {
+  width: 100%; padding: 0; gap: 0; /* même largeur que « Ajouter », juste en dessous */
+  background: var(--field); color: var(--ink);
+  border: 1px solid var(--hairline);
+  transition: transform .18s ease, background .2s ease, border-color .2s ease;
+}
+.scan-btn:active { transform: scale(.94); background: var(--bar); }
+.scan-btn.is-on { background: var(--bar); border-color: var(--ink-3); }
+@media (hover: hover) { .scan-btn:hover { background: var(--glass-2); } }

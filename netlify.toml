@@ -1,0 +1,33 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# En-têtes de sécurité. ARVO n'a ni compte ni serveur : tout reste dans le navigateur.
+# La politique ci-dessous n'autorise que ce que l'appli utilise réellement :
+#   - ses propres fichiers (dont le moteur de lecture d'étiquettes, WebAssembly, servi depuis /ocr/) ;
+#   - ses polices, hébergées avec l'appli (aucune requête vers Google) ;
+#   - l'API de taux de change open.er-api.com.
+# Rien d'autre : pas de script tiers, pas de cadre, pas de formulaire envoyé à l'extérieur.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://open.er-api.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "camera=(self), microphone=(), geolocation=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Cross-Origin-Opener-Policy = "same-origin"
+    X-Permitted-Cross-Domain-Policies = "none"
+
+# Le service worker doit toujours être revalidé, sinon une mise à jour de l'appli peut tarder à arriver.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Fichiers versionnés par Vite (le nom change à chaque modification) : cache long et sûr.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
