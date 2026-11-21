@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Icon from './components/Icon.jsx';
 import ShoppingList from './components/ShoppingList.jsx';
 import Converter from './components/Converter.jsx';
@@ -126,6 +127,8 @@ export default function App() {
           <Icon name="swap" size={22} /><span>Devises</span>
         </a>
       </nav>
+
+      <Analytics />
     </>
   );
 }
